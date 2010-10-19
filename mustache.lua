@@ -7,6 +7,7 @@
 module(..., package.seeall);
 
 DEBUG = false
+--DEBUG = true
 
 otag = "{{"
 ctag = "}}"
@@ -69,6 +70,12 @@ local function render_tags(template, env)
                     ret = ret .. env[tagname]
                 end
             end
+        elseif tagmod == '&' or tagmod == '{' then
+            debug("[debug-loop]", "no escape modifier detected")
+        elseif tagmod == '!' then
+            debug("[debug-loop", "comment detected; skipped")
+        elseif tagmod == '=' or tagmod == '>' then
+            debug("[debug-loop", "modifier '" .. tagmod .. "' not implemented")
         end
 
         template = eat(tagend - tagstart + 2, template)
