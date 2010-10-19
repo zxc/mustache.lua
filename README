@@ -1,0 +1,16 @@
+
+=== mustache.lua ===
+
+
+= What?
+    - Mustache is a logic free template language
+    - Based on github.com/defunkt/mustache
+
+= Why?
+    - To learn Lua
+    - Also, didn't see github.com/nrk/hige
+
+= Status
+    - Right now only individual tags work
+    - Run 'lua tests.lua' to see examples that work
+    - Sections are coming soon
