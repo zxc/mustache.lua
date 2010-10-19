@@ -1,6 +1,8 @@
 --
 -- mustache.lua
 --
+-- external function: render(template, environment)
+--
 
 module(..., package.seeall);
 
@@ -16,6 +18,12 @@ tag_pattern = "(" .. otag .. "%s*([&!{]?)%s*([^}]+)%s*}?" .. ctag .. ")"
 -- sect modifiers: '#'=open, '/'=close, '^'=invert
 local sect_pattern = "(" .. otag .. ""
 
+-- print debug messages
+local function debug(...)
+    if DEBUG then print(...) end
+end
+
+-- delete from a string, and optionally append to another
 local function eat(amt, src, dest)
     if dest then dest = dest .. src:sub(0, amt - 1) end
     src = src:sub(amt, -1)
@@ -24,10 +32,12 @@ local function eat(amt, src, dest)
     return src
 end
 
+-- remove whitespace at the beginning and end of a string
 local function trim(s)
     return (s:gsub("^%s*(.-)%s*$", "%1"))
 end
 
+-- render single tags
 local function render_tags(template, env)
     local ret = ""
 
@@ -40,20 +50,16 @@ local function render_tags(template, env)
         end
         tagname = trim(tagname)
 
-if DEBUG then
-    print("[debug-loop]", "tagstart = ", tagstart)
-    print("[debug-loop]", "tagend   = ", tagend)
-    print("[debug-loop]", "tag      = ", "'"..tag.."'")
-    print("[debug-loop]", "tagmod   = ", "'"..tagmod.."'")
-    print("[debug-loop]", "tagname  = ", "'"..tagname.."'")
-end
+        debug("[debug-loop]", "tagstart = ", tagstart)
+        debug("[debug-loop]", "tagend   = ", tagend)
+        debug("[debug-loop]", "tag      = ", "'"..tag.."'")
+        debug("[debug-loop]", "tagmod   = ", "'"..tagmod.."'")
+        debug("[debug-loop]", "tagname  = ", "'"..tagname.."'")
 
         template, ret = eat(tagstart, template, ret)
 
-if DEBUG then
-    print("[debug-loop]", "template = ", "'"..template.."'")
-    print("[debug-loop]", "ret      = ", "'"..ret.."'")
-end
+        debug("[debug-loop]", "template = ", "'"..template.."'")
+        debug("[debug-loop]", "ret      = ", "'"..ret.."'")
 
         if tagmod == '' then
             if env[tagname] then
@@ -67,10 +73,8 @@ end
 
         template = eat(tagend - tagstart + 2, template)
 
-if DEBUG then
-    print("[debug-loop]", "template = ", "'"..template.."'")
-    print("[debug-loop]", "ret      = ", "'"..ret.."'")
-end
+        debug("[debug-loop]", "template = ", "'"..template.."'")
+        debug("[debug-loop]", "ret      = ", "'"..ret.."'")
 
     end
 
