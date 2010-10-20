@@ -33,22 +33,12 @@ sect_pattern = "(" .. otag .. "%s*[#^]%s*([^}]+)%s*}?" .. ctag ..  "%s*(.*)%s*" 
 -- print debug messages
 local function debug(...) if DEBUG then print(...) end end
 
--- delete from a string, and optionally append to another
-local function eat(amt, src, dest)
-    if dest then dest = dest .. src:sub(0, amt - 1) end
-    src = src:sub(amt, -1)
-
-    if dest then return src, dest end
-    return src
-end
-
 -- remove whitespace at the beginning and end of a string
-local function trim(s)
-    return (s:gsub("^%s*(.-)%s*$", "%1"))
-end
+local function trim(s) return (s:gsub("^%s*(.-)%s*$", "%1")) end
 
 -- escape characters '&', '>' and '<' for HTML
 local function escape(s)
+    if type(s) ~= 'string' then return s end
     return (s:gsub('&', '&amp;'):gsub('>', '&gt;'):gsub('<', '&lt;'))
 end
 
@@ -127,15 +117,11 @@ local function render_tags(template, env)
 end
 
 local function render_sections(template, env)
-    local ret = ""
 
     while true do
         tagstart, tagend, tag, tagname, content = template:find(sect_pattern)
 
-        if tagstart == nil then
-            ret = ret .. template
-            break
-        end
+        if tagstart == nil then break end
         tagname = trim(tagname)
 
         debug("[debug-loop]", "tagstart = ", tagstart)
@@ -143,18 +129,14 @@ local function render_sections(template, env)
         debug("[debug-loop]", "tag      = ", "'"..tag.."'")
         debug("[debug-loop]", "tagname  = ", "'"..tagname.."'")
         debug("[debug-loop]", "content  = ", "'"..content.."'")
-
-        template, ret = eat(tagstart, template, ret)
         debug("[debug-loop]", "template = ", "'"..template.."'")
-        debug("[debug-loop]", "ret      = ", "'"..ret.."'")
 
-        val = env[tagname]
-        
+        -- TODO --       
 
         break
     end
         
-    return ret
+    return template
 end
 
 function render(template, env)
