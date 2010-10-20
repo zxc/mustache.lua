@@ -7,10 +7,13 @@
     - Based on github.com/defunkt/mustache
 
 = Why?
-    - To learn Lua
+    - To learn Lua (I'm new to it, let me know if something is not Lua-esque)
     - Also, didn't see github.com/nrk/hige
 
 = Status
     - Right now only individual tags work
-    - Run 'lua tests.lua' to see examples that work
-    - Sections are coming soon
+        - Normal tags: {{ foo }} or {{foo}}
+        - Unescaping: {{ &foo }} or {{{foo}}}
+        - Comments: {{! This won't appear }}
+    - Run 'lua tests.lua' to see some examples that work
+    - Sections are a work in progress
