@@ -15,7 +15,12 @@ tests = {
       correct = "no whitespace works" },
 
     { tem = "a comment {{! this is invisible }}", env = { },
-      correct = "a comment "}
+      correct = "a comment " },
+
+    { tem = "escaped: '{{ esc }}', unescaped: '{{& esc }}'", env = { 
+      esc = "&" }, correct = "escaped: '&amp;', unescaped: '&'" },
+
+
 --[[
     { tem = "{{#list}} name = {{ name }} {{/list}}", env = { list = {
       { name = "foo" }, { name = "bar" }, { name = "quux" } } },
