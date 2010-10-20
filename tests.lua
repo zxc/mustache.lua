@@ -16,6 +16,28 @@ tests = {
 
     { tem = "a comment {{! this is invisible }}", env = { },
       correct = "a comment "}
+--[[
+    { tem = "{{#list}} name = {{ name }} {{/list}}", env = { list = {
+      { name = "foo" }, { name = "bar" }, { name = "quux" } } },
+      correct = " name = foo  name = bar  name = quux " },
+
+    { tem = "{{#list}} name = {{ . }} {{/list}}", env = { list = {
+      "foo", "bar", "quux" } },
+      correct = " name = foo  name = bar  name = quux " },
+
+    { tem = "{{ #bool }} maybe shown {{ /bool }}", env = { bool = true },
+      correct = " maybe shown " },
+
+    { tem = "{{ #list }} maybe shown {{ . }} {{ /list }}", env = { list = { } },
+      correct = "" },
+
+    { tem = {{ ^list }} list is empty! {{ /list }}", env = { list = { } },
+      correct = " list is empty! " },
+--]]
+
+-- Add nested section test
+-- Add "lambda/wrapped" test
+-- Add multiline tests
 }
 
 for i, v in ipairs(tests) do
