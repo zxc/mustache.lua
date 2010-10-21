@@ -33,6 +33,12 @@ tests = {
     { tem = "{{ ^list }} list is empty! {{ /list }}", env = { list = { } },
       correct = " list is empty! " },
 
+    { tem = "{{ ^foo }} must be false {{ /foo }}", env = { foo = false },
+      correct = " must be false " },
+
+    { tem = "{{ #person }} name = {{ name }} {{ /person }}", env = { person = {
+        name = "john" } }, correct = " name = john " },
+
 --    { tem = "{{#list}} name = {{ . }} {{/list}}", env = { list = {
 --      "foo", "bar", "quux" } },
 --      correct = " name = foo  name = bar  name = quux " },
