@@ -27,4 +27,6 @@
 = Todo
     - Rendering to and from files
     - Iteration as in mustache.js, with {{ . }}
-    - Test fully on examples is Defunkt's Mustache docs
+    - Test fully on examples on Defunkt's Mustache docs
+    - Remove debug statements
+    - Find any other scoping problems (add local?)
