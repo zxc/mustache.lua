@@ -11,9 +11,20 @@
     - Also, didn't see github.com/nrk/hige
 
 = Status
-    - Right now only individual tags work
-        - Normal tags: {{ foo }} or {{foo}}
-        - Unescaping: {{ &foo }} or {{{foo}}}
-        - Comments: {{! This won't appear }}
-    - Run 'lua tests.lua' to see some examples that work
-    - Sections are a work in progress
+    - Mostly complete
+    - Working:
+        - Normal tags
+        - Unescaped tags
+        - Comment tags
+        - Inverted sections
+        - Wrappers
+        - Dictionaries
+        - Lists of key/value pairs
+        - Empty lists
+        - Booleans
+    - Run 'lua tests.lua' to see examples that work
+
+= Todo
+    - Rendering to and from files
+    - Iteration as in mustache.js, with {{ . }}
+    - Test fully on examples is Defunkt's Mustache docs
