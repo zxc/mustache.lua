@@ -20,25 +20,22 @@ tests = {
     { tem = "escaped: '{{ esc }}', unescaped: '{{& esc }}'", env = { 
       esc = "&" }, correct = "escaped: '&amp;', unescaped: '&'" },
 
-
---[[
     { tem = "{{#list}} name = {{ name }} {{/list}}", env = { list = {
       { name = "foo" }, { name = "bar" }, { name = "quux" } } },
-      correct = " name = foo  name = bar  name = quux " },
-
-    { tem = "{{#list}} name = {{ . }} {{/list}}", env = { list = {
-      "foo", "bar", "quux" } },
       correct = " name = foo  name = bar  name = quux " },
 
     { tem = "{{ #bool }} maybe shown {{ /bool }}", env = { bool = true },
       correct = " maybe shown " },
 
-    { tem = "{{ #list }} maybe shown {{ . }} {{ /list }}", env = { list = { } },
+    { tem = "{{ #list }} item: {{ foo }} {{ /list }}", env = { list = { } },
       correct = "" },
 
-    { tem = {{ ^list }} list is empty! {{ /list }}", env = { list = { } },
+    { tem = "{{ ^list }} list is empty! {{ /list }}", env = { list = { } },
       correct = " list is empty! " },
---]]
+
+--    { tem = "{{#list}} name = {{ . }} {{/list}}", env = { list = {
+--      "foo", "bar", "quux" } },
+--      correct = " name = foo  name = bar  name = quux " },
 
 -- Add nested section test
 -- Add "lambda/wrapped" test
