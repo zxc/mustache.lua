@@ -11,7 +11,7 @@
     - Also, didn't see github.com/nrk/hige
 
 = Status
-    - Mostly complete
+    - Mostly complete, issues remain though.
     - Working:
         - Normal tags
         - Unescaped tags
@@ -26,6 +26,7 @@
 
 = Todo
     - Rendering to and from files
+        - In progress, but currently example.mustache and example.lua don't work.
     - Iteration as in mustache.js, with {{ . }}
     - Test fully on examples on Defunkt's Mustache docs
     - Remove debug statements
