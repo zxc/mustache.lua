@@ -195,3 +195,12 @@ function render(template, env)
 
     return template
 end
+
+function renderfile(filename, env)
+    require "io"
+    lines = {}
+    for line in io.open(filename, "r"):lines() do
+        table.insert(lines, line)
+    end
+    return render(table.concat(lines, '\n'), env)
+end
